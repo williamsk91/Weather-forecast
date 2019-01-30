@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import AsyncSearchBar from './components/AsyncSearchBar'
+import Timeline from './components/Timeline'
+import { connect } from 'react-redux'
+import Map from './components/Map'
 
 class App extends Component {
+
   render() {
+    const timeline = this.props.lat ? <Timeline lat={this.props.lat} lon={this.props.lon} /> : null;
+    // const map = this.props.lat ? <Map /> : null;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <AsyncSearchBar />
+        {/* {map} */}
+        {timeline}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      lat: state.lat,
+      lon: state.lng
+  }
+}
+
+export default connect(mapStateToProps)(App);
