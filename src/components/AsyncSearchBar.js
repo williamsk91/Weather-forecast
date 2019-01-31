@@ -18,6 +18,7 @@ const loadOptions = (inputValue, callback) => {
 class AsyncSearchBar extends Component {
 
   handleChange = (e) => {
+    console.log(e)
     this.props.setCity(e)
   }
 
@@ -38,8 +39,14 @@ class AsyncSearchBar extends Component {
             }
           noOptionsMessage={this.noOptionsMessage}
           placeholder={'Start typing a city name'}
+          
         />
     )
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    city: state.city
   }
 }
 
